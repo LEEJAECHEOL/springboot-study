@@ -1,0 +1,15 @@
+package com.cos.myiocdi;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+// Component, Configuration, Service, Repository
+
+@RestController
+public class PostController {
+	
+	@GetMapping("/")
+	public String home() {
+		return "home";
+	}
+}

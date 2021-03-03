@@ -1,0 +1,11 @@
+package com.cos.myiocdi;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class PostController {
+	
+	public String home() {
+		return "home";
+	}
+}

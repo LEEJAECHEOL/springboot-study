@@ -1,0 +1,28 @@
+package com.cos.myjpa.web;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cos.myjpa.domain.post.Post;
+import com.cos.myjpa.domain.post.PostRepository;
+import com.cos.myjpa.web.dto.CommonRespDto;
+import com.cos.myjpa.web.post.dto.PostSaveReqDto;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@RestController
+public class TestController {
+	
+	private final PostRepository postRepository;
+	
+	@PostMapping("/test/post")
+	public CommonRespDto<?> save(@RequestBody PostSaveReqDto postSaveDto) { // title, content 
+		Post postEntity = postRepository.save(postSaveDto.toEntity()); // => 실패 Exception을 탄다.
+		return new CommonRespDto<>(1, postEntity);
+	}
+//	@GetMapping()
+
+}

@@ -1,0 +1,20 @@
+package com.cos.myjpa.domain.post;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.Data;
+
+@Data
+@Entity
+public class Post {
+	@Id // PK
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Table, auto_increment, Sequence
+	private Long id;
+	@Column(length = 60, nullable = false)
+	private String title;
+	private String content;
+}

@@ -1,0 +1,44 @@
+package com.cos.myjpa.web;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cos.myjpa.domain.post.Post;
+import com.cos.myjpa.domain.post.PostRepository;
+import com.cos.myjpa.web.dto.CommonRespDto;
+import com.cos.myjpa.web.post.dto.PostSaveReqDto;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@RestController
+public class TestController {
+	
+	private final PostRepository postRepository;
+	
+	@PostMapping("/test/post")
+	public CommonRespDto<?> save(@RequestBody PostSaveReqDto postSaveDto) { // title, content 
+		Post postEntity = postRepository.save(postSaveDto.toEntity()); // => 실패 Exception을 탄다.
+		return new CommonRespDto<>(1, "성공", postEntity);
+	}
+	@GetMapping("/test/post")
+	public CommonRespDto<?> findAll(){
+		List<Post> postEntity = postRepository.findAll();
+		return new CommonRespDto<>(1, "성공", postEntity);
+	}
+	@GetMapping("/test/post/{id}")
+	public CommonRespDto<?> findById(@PathVariable Long id){
+		// null이 될 수 있다.
+		// 화살표 함수 get() (orElseThrow 안에 )
+		Post postEntity = postRepository.findById(id).orElseThrow(()->{
+			return new IllegalArgumentException("id를 찾을 수 없습니다.");
+		});
+		return new CommonRespDto<>(1, "성공", postEntity);
+	}
+
+}

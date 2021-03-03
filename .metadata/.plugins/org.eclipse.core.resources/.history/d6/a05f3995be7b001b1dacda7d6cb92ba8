@@ -1,0 +1,13 @@
+package com.cos.myjpa.domain.post;
+
+import javax.persistence.Entity;
+
+import lombok.Data;
+
+@Data
+@Entity
+public class Post {
+	private Long id;
+	private String title;
+	private String content;
+}

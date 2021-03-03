@@ -1,0 +1,17 @@
+package com.cos.myjpa.exhandler;
+
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.cos.myjpa.web.dto.CommonRespDto;
+
+@ControllerAdvice // 모든 익셉션을 낚아챔.
+public class GlobalExceptionHandler {
+	
+	// 그 중 IllegalArgumentException이 발생하면 해당 함수 실행됨.
+	@ExceptionHandler(value = IllegalArgumentException.class)
+	public CommonRespDto<?> 잘못된인수(Exception e){
+		return new CommonRespDto<>(-1, e.getMessage(), null);
+	}
+
+}

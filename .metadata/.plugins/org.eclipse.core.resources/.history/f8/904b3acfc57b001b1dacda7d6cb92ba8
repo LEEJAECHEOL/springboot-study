@@ -1,0 +1,23 @@
+package com.cos.myjpa.web;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cos.myjpa.domain.post.PostRepository;
+import com.cos.myjpa.web.post.dto.PostSaveReqDto;
+
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@RestController
+public class TestController {
+	
+	private final PostRepository postRepository;
+	
+	@PostMapping("/test/post")
+	public void save(@RequestBody PostSaveReqDto postSaveDto) { // title, content 
+		postRepository.save(postSaveDto.toEntity());
+	}
+
+}

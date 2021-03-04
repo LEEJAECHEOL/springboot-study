@@ -22,3 +22,6 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
     open-in-view: true #몰라도 됨
+  jackson:
+    serialization:
+      fail-on-empty-beans: false

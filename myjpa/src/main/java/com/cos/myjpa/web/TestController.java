@@ -29,10 +29,10 @@ public class TestController {
 	@PostMapping("/test/post")
 	public CommonRespDto<?> save(@RequestBody PostSaveReqDto postSaveDto) { // title, content
 		// 원래는 세션값을 넣어야 함.
-		User user = new User(1L, "ssar", "1234", "ssar@nate.com", LocalDateTime.now());
+//		User user = new User(1L, "ssar", "1234", "ssar@nate.com", LocalDateTime.now());
 		
 		Post postEntity = postRepository.save(postSaveDto.toEntity()); // => 실패 Exception을 탄다.
-		postEntity.setUser(user);
+//		postEntity.setUser(user);
 		return new CommonRespDto<>(1, "성공", postEntity);
 	}
 	

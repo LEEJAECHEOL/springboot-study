@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +15,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.cos.myjpa.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,9 +37,14 @@ public class Post {
 	private String content;
 	
 	// 누가 적었는지 ?
-	@ManyToOne // 연관관계 맺는 법. FK의 주인인 곳에서 적어야 됨.
+	// FetchType.EAGER 빨리, FetchType.LAZY 느리게
+	// 즉시 가져오는 건 조인이고 느리게 가져오는건 셀렉트로 가져옴.
+	// 한건 만가져올 떄는 괜찮음 근데 이반대 상황에는 LAZY전략이 좋음. -> user를 호출할 때 가져옴.
+	// 
+	@ManyToOne(fetch = FetchType.LAZY) // 연관관계 맺는 법. FK의 주인인 곳에서 적어야 됨.
 	@JoinColumn(name = "userId")
-	private User user;
+//	@JsonIgnoreProperties({"posts"}) 
+	private User user; // 데이터베이스에는 FK가 들어감.
 	
 	@CreationTimestamp // 자동으로 현재시간이 들어감.
 	private LocalDateTime createDate;

@@ -1,4 +1,4 @@
-package com.cos.myjpa.exhandler;
+package com.cos.myjpa.handler;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;

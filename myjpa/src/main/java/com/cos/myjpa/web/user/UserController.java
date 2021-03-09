@@ -28,12 +28,14 @@ public class UserController {
 	private final HttpSession session;
 	private final UserService userService;
 	
+	// 인증만 필요
 	@GetMapping("/user") // 유저정보
 	public CommonRespDto<?> findAll(){
 		
 		return new CommonRespDto<>(1,"성공", userService.전체찾기());
 	}
 	
+	// 인증만 필요
 	@GetMapping("/user/{id}") // 유저정보
 	public CommonRespDto<?> findById(@PathVariable Long id){
 		return new CommonRespDto<>(1,"성공", userService.한건찾기(id));
@@ -46,6 +48,7 @@ public class UserController {
 	
 	@PostMapping("/join") // auth(인증) /join
 	public CommonRespDto<?> join(@RequestBody UserJoinReqDto userJoinReqDto){
+		System.out.println("is run");
 		return new CommonRespDto<>(1, "성공", userService.회원가입(userJoinReqDto));
 	}
 	

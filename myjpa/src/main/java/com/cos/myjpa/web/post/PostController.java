@@ -46,6 +46,7 @@ public class PostController {
 		return new CommonRespDto<>(1, "성공", postService.저장하기(postSaveReqDto, principal));
 	}
 	
+	// 인증만필요
 	@GetMapping("/post/{id}")
 	public CommonRespDto<?> findById(@PathVariable Long id){
 		
@@ -53,18 +54,20 @@ public class PostController {
 		return new CommonRespDto<>(1, "성공", postService.한건가져오기(id)); // MessageConverter가 모든 getter를 다 호출해서 JSON으로 만들어준다.
 	}
 	
+	// 인증만필요
 	@GetMapping("/post")
 	public CommonRespDto<?> findAll(){
 		return new CommonRespDto<>(1, "성공", postService.전체찾기());
 	}
 	
-	
+	// 인증 필요(Authentication) + 권한(Authrization)이 필요
 	@PutMapping("/post/{id}")
 	public CommonRespDto<?> update(@PathVariable Long id, @RequestBody PostUpdateReqDto postUpdateReqDto){
 
 		return new CommonRespDto<>(1, "성공", postService.수정하기(id, postUpdateReqDto));
 	}
-	
+
+	// 인증 필요(Authentication) + 권한(Authrization)이 필요
 	@DeleteMapping("/post/{id}")
 	public CommonRespDto<?> deleteById(@PathVariable Long id){
 		postService.삭제하기(id);
